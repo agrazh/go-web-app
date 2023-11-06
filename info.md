@@ -1,7 +1,7 @@
 ### Basics
 
 <details>
-<summary>Types and Structs</summary>
+<summary>Maps and Slices</summary>
 
 ```
 CODE
@@ -9,11 +9,85 @@ CODE
 </details>
 
 <details>
+<summary>Structs with functions</summary>
+
+`func (m *myStruct) printFirstName() string {}`, where `(m *myStruct)` is a receiver - tt ties function to `myStruct`:
+
+```
+package main
+
+import "log"
+
+type myStruct struct {
+	FirstName string
+}
+
+// func printFirstName() string {}
+// `(m *myStruct)` - is a receiver. It ties function to `myStruct`. 
+func (m *myStruct) printFirstName() string {
+	return m.FirstName
+}
+
+
+func main() {
+	var myVar myStruct
+	myVar.FirstName = "John"
+
+	myVar2 := myStruct{
+		FirstName: "Mary",
+	}
+
+	log.Println("myVar:", myVar.printFirstName())
+	log.Println("myVar2", myVar2.printFirstName())
+}
+```
+</details>
+
+<details>
+<summary>Types and Structs</summary>
+
+Struct type.<br/>
+_Uppercase names_ are available outside of the package. _Lowercase names_ are available only inside the package.  
+
+```
+package main
+
+import (
+	"log"
+	"time"
+)
+
+type User struct {
+	FirstName   string
+	LastName    string
+	PhoneNumber string
+	Age         int
+	birthDate   time.Time
+}
+
+func main() {
+	user := User{
+		FirstName:   "Ameera",
+		LastName:    "Knowles",
+		PhoneNumber: "1 555 555-1212",
+	}
+
+	log.Println(user.FirstName, user.LastName, user.birthDate)
+}
+
+func whatever()    {} // is only available only whithin current package
+func Whatever()    {} // is visible outside of current pacakge
+var special string // is availalbe only whithin current package
+var Special string // is available outside of current package
+```
+</details>
+
+<details>
 <summary>Pointers</summary>
 
 `&` - get address of the value. `*` - get value by the address.<br/>
-`s *string` - decalare pointer to the string value.
-
+`s *string` - decalare pointer to the string value.<br/>
+`log` package.
 
 ```
 package main
@@ -40,6 +114,8 @@ func changeUsingPointer(s *string) {
 <details>
 <summary>Variables & Functions</summary>
 
+`fmt` package.
+
 ```
 // package declaration is mandatory
 package main
@@ -52,6 +128,8 @@ func main() {
 
 	var whatToSay string
 	var i int
+	// var i = 4
+	// i := 4
 
 	whatToSay = "Goodbye, cruel world"
 	fmt.Println(whatToSay)
@@ -77,6 +155,7 @@ func saySomething() (string, string) {
 
 <br/>
 
+
 ### docs
 
 [Go standart library documentatoin - [pkg.go.dev]](https://pkg.go.dev/std)<br/>
@@ -87,6 +166,7 @@ func saySomething() (string, string) {
 [cdnjs - another great CDN - [cdnjs.com]](https://cdnjs.com/)
 
 <br/>
+
 
 ### "hello" program
 
@@ -104,22 +184,30 @@ func main() {
 
 <br/>
 
+
 ### Installation
-
-
-
 
 [Go extension by "Go Team at Google" - [marketplace.visualstudio.com]](https://marketplace.visualstudio.com/items?itemName=golang.go)<br/>
 \* VS Code > `Ctrl + Shift + p` > `Go: Install/Update Tolls` > select all > `OK` <br/>
 \* "Error loading workspace: gopls was not able to find modules in your workspace" [[stackoverflow.com]](https://stackoverflow.com/questions/65748509/vscode-shows-an-error-when-having-multiple-go-projects-in-a-directory) : </br>
+
 ```
-$ cd /my/parent/dir
+$ cd /app-dir/module1
+$ go mod init app.org/module1
+$ cd /app-dir/module2
+$ go mod init app.org/module2
+
+$ cd /app-dir
 $ go work init
-$ go work use project-one
-$ go work use project-two
+$ go work use module1
+$ go work use module2
 ```
 
-[VS Code - [code.visualstudio.com]](https://code.visualstudio.com/download)<br/>
+Multi-module workspaces [[go.dev]](https://go.dev/doc/tutorial/workspaces)
 
-[Go binanaries - [go.dev]](https://go.dev/dl/)<br/>
-\* Terminal > `$ go version`
+---
+
+VS Code [[code.visualstudio.com]](https://code.visualstudio.com/download)<br/>
+
+Terminal > `$ go version`<br/>
+Go binanaries [[go.dev]](https://go.dev/dl/)<br/>
