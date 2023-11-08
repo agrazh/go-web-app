@@ -1,50 +1,30 @@
 package main
 
-import (
-	"log"
-	"sort"
-)
-
-type User struct {
-	FirstName string
-	LastName  string
-}
+import "log"
 
 func main() {
-	// var myMap map[string]string
-	// `[string]` - is the index of the map, `int` - value stored
-	myMap := make(map[string]int)
+	// var isTrue bool
+	isTrue := true
+	myNum := 101
 
-	myMap["First"] = 1
-	myMap["Second"] = 2
-
-	log.Println(myMap["First"])
-	log.Println(myMap["Second"])
-	// maps are imutable
-	// `myMap := make(map[string]string)`
-	// - will throw an exception "no new variables on left side of :="
-
-	// Map of structs
-	users := make(map[string]User)
-
-	user1 := User{
-		FirstName: "Lucinda",
-		LastName:  "Tanner",
+	// if isTrue == true
+	if myNum >= 100 && isTrue {
+		log.Println(isTrue)
+	} else if myNum < 100 && !isTrue {
+		log.Println(isTrue)
+	} else {
+		log.Println(isTrue)
 	}
 
-	users["user1"] = user1
-	log.Println(users["user1"].FirstName)
+	// switch statement
+	myVar := "cat"
 
-	// Slice
-	var mySlice []int
-	numbers := []string{"one", "two", "three", "four"}
-
-	mySlice = append(mySlice, 2)
-	mySlice = append(mySlice, 1)
-	mySlice = append(mySlice, 3)
-
-	sort.Ints(mySlice)
-
-	log.Println(mySlice)
-	log.Println(numbers[0:2])
+	switch myVar {
+	case "cat":
+		log.Println(myVar)
+	case "dog":
+		log.Println(myVar)
+	default:
+		log.Println(myVar)
+	}
 }

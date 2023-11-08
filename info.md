@@ -10,6 +10,46 @@ CODE
 
 
 <details>
+<summary>Decision structures</summary>
+
+`if {} if else {} else {}`<br/>
+`switch {case: default: }`
+
+```
+package main
+
+import "log"
+
+func main() {
+	// var isTrue bool
+	isTrue := true
+	myNum := 101
+
+	// if isTrue == true
+	if myNum >= 100 && isTrue {
+		log.Println(isTrue)
+	} else if myNum < 100 && !isTrue {
+		log.Println(isTrue)
+	} else {
+		log.Println(isTrue)
+	}
+
+	// switch statement
+	myVar := "cat"
+
+	switch myVar {
+	case "cat":
+		log.Println(myVar)
+	case "dog":
+		log.Println(myVar)
+	default:
+		log.Println(myVar)
+	}
+}
+```
+</details>
+
+<details>
 <summary>Maps and Slices</summary>
 
 `myMap := make(map[string]int)` : `[string]` - is the index of the map, `int` - value stored at indexes.<br/>
