@@ -3,28 +3,30 @@ package main
 import "log"
 
 func main() {
-	// var isTrue bool
-	isTrue := true
-	myNum := 101
-
-	// if isTrue == true
-	if myNum >= 100 && isTrue {
-		log.Println(isTrue)
-	} else if myNum < 100 && !isTrue {
-		log.Println(isTrue)
-	} else {
-		log.Println(isTrue)
+	for i := 0; i <= 10; i++ {
+		log.Println(i)
 	}
 
-	// switch statement
-	myVar := "cat"
 
-	switch myVar {
-	case "cat":
-		log.Println(myVar)
-	case "dog":
-		log.Println(myVar)
-	default:
-		log.Println(myVar)
+	animals1 := []string{"dog", "fish", "horse", "cow", "cat"}
+
+	for i, elem := range animals1 {
+		log.Println(i, elem)
+	}
+
+
+	animals2 := make(map[string]string)
+	animals2["dog"] = "Fido"
+	animals2["cat"] = "Flufy"
+
+
+	for _, elem := range animals2 {
+		log.Println(elem)
+	}
+
+
+	firstLine := "Hello World"
+	for i, l := range firstLine {
+		log.Println(i, l)
 	}
 }
