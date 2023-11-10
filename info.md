@@ -10,6 +10,60 @@ CODE
 </details>
 
 <details>
+<summary>Interfaces</summary>
+
+`type Animal interface {}` - interface allowed us to build a function that acceps two differnt types. These types satisfies inteface requirement.
+
+```
+package main
+
+import "fmt"
+
+type Animal interface {
+	Says() string
+	NumberOfLegs() int
+}
+
+// this function will be able to acccept Dog and Gorrila type
+func PrintInfo(a Animal) {
+	fmt.Println(a.Says(), a.NumberOfLegs())
+}
+
+type Dog struct {
+	Name  string
+	Breed string
+}
+
+type Gorilla struct {
+	Name          string
+	Color         string
+	NumberOfTeeth int
+}
+
+func (d *Dog) Says() string {
+	return "Woof"
+}
+func (d *Dog) NumberOfLegs() int {
+	return 4
+}
+func (d *Gorilla) Says() string {
+	return "Ugh"
+}
+func (d *Gorilla) NumberOfLegs() int {
+	return 2
+}
+
+func main() {
+	dog := Dog{Name: "Samson", Breed: "German Shephered"}
+	PrintInfo(&dog)
+
+	gorilla := Gorilla{Name: "Jock", Color: "black", NumberOfTeeth: 32}
+	PrintInfo(&gorilla)
+}
+```
+</details>
+
+<details>
 <summary>Loops</summary>
 
 `for i := 0; i <= 10; i++ {}`<br/>

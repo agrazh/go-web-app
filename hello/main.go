@@ -1,32 +1,49 @@
 package main
 
-import "log"
+import "fmt"
+
+type Animal interface {
+	Says() string
+	NumberOfLegs() int
+}
+
+func PrintInfo(a Animal) {
+	fmt.Println(a.Says(), a.NumberOfLegs())
+}
+
+type Dog struct {
+	Name  string
+	Breed string
+}
+
+type Gorilla struct {
+	Name          string
+	Color         string
+	NumberOfTeeth int
+}
+
+func (d *Dog) Says() string {
+	return "Woof"
+}
+func (d *Dog) NumberOfLegs() int {
+	return 4
+}
+func (d *Gorilla) Says() string {
+	return "Ugh"
+}
+func (d *Gorilla) NumberOfLegs() int {
+	return 2
+}
 
 func main() {
-	for i := 0; i <= 10; i++ {
-		log.Println(i)
-	}
+	dog := Dog{Name: "Samson", Breed: "German Shephered"}
 
+	PrintInfo(&dog)
 
-	animals1 := []string{"dog", "fish", "horse", "cow", "cat"}
+	gorilla := Gorilla{Name: "Jock", Color: "black", NumberOfTeeth: 32}
 
-	for i, elem := range animals1 {
-		log.Println(i, elem)
-	}
-
-
-	animals2 := make(map[string]string)
-	animals2["dog"] = "Fido"
-	animals2["cat"] = "Flufy"
-
-
-	for _, elem := range animals2 {
-		log.Println(elem)
-	}
-
-
-	firstLine := "Hello World"
-	for i, l := range firstLine {
-		log.Println(i, l)
-	}
+	PrintInfo(&gorilla)
 }
+
+// interface allowed us to build a function that acceps
+// two differnt types. These types satisfies inteface requirement
