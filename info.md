@@ -9,6 +9,51 @@ CODE
 </details>
 
 <details>
+<summary>Channels</summary>
+
+Channels are used for goroutine comunication.
+
+`intChan <- randomNumber` - push into the channel<br/>
+`num := <-intChan` - pull from the channel<br/>
+`go calculateValue(intChan)` - run goroutine<br/>
+`defer close(intChan)` - close channel once parent function is done.
+
+```
+package main
+
+import (
+	"log"
+	"math/rand"
+	"time"
+)
+
+const numPool = 100
+
+func calculateValue(intChan chan int) {
+	rand.Seed(time.Now().UnixNano())
+	randomNumber := rand.Intn(numPool)
+
+	// or: 
+	// s1 := rand.NewSource(time.Now().UnixNano())
+    // r1 := rand.New(s1)
+	// randomNumber := r1.Intn(numPool)
+
+	intChan <- randomNumber
+}
+
+func main() {
+	intChan := make(chan int)
+	defer close(intChan)
+
+	go calculateValue(intChan)
+
+	num := <-intChan
+	log.Println(num)
+}
+```
+</details>
+
+<details>
 <summary>Packages</summary>
 
 `$ cd /app-dir/helpers`<br/>

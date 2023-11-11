@@ -1,6 +1,8 @@
 package helpers
 
-type HelperType struct {
-	Name   string
-	Number int
+import "math/rand"
+
+func RandomNumber(n int) int {
+	value := rand.Intn(n)
+	return value
 }
