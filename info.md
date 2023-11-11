@@ -1,12 +1,49 @@
 ### Basics
 
-
 <details>
 <summary>Title</summary>
 
 ```
 CODE
 ```
+</details>
+
+<details>
+<summary>Packages</summary>
+
+`$ cd /app-dir/helpers`<br/>
+`$ cat help.go` :
+```
+package helpers
+
+func MyFunc() {...}  // upper-case name
+
+```
+
+<br/>
+
+`$ cd /app-dir`<br/>
+`$ go mod init com/my-web-app`<br/>
+`$ cat go.mod` :
+
+```
+module com/go-web-app
+
+go 1.18
+```
+
+<br/>
+
+`$ cat main.go` :
+
+```
+package main
+
+import "com/go-web-app/helpers"
+
+func main() {...}
+```
+
 </details>
 
 <details>
@@ -385,7 +422,7 @@ func main() {
 
 ### Installation
 
-[Go extension by "Go Team at Google" - [marketplace.visualstudio.com]](https://marketplace.visualstudio.com/items?itemName=golang.go)<br/>
+\* Go extension by "Go Team at Google" [[marketplace.visualstudio.com]](https://marketplace.visualstudio.com/items?itemName=golang.go)<br/>
 \* VS Code > `Ctrl + Shift + p` > `Go: Install/Update Tolls` > select all > `OK` <br/>
 \* "Error loading workspace: gopls was not able to find modules in your workspace" [[stackoverflow.com]](https://stackoverflow.com/questions/65748509/vscode-shows-an-error-when-having-multiple-go-projects-in-a-directory) : </br>
 
