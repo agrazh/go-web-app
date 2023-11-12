@@ -1,31 +1,68 @@
 package main
 
 import (
-	"log"
-	"math/rand"
-	"time"
+	"encoding/json"
+	"fmt"
 )
 
-const numPool = 100
-
-func calculateValue(intChan chan int) {
-	rand.Seed(time.Now().UnixNano())
-	randomNumber := rand.Intn(numPool)
-
-	// or: 
-	// s1 := rand.NewSource(time.Now().UnixNano())
-    // r1 := rand.New(s1)
-	// randomNumber := r1.Intn(numPool)
-
-	intChan <- randomNumber
+type Person struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	HairColor string `json:"hair_color"`
+	HasDog    bool   `json:"has_dog"`
 }
 
 func main() {
-	intChan := make(chan int)
-	defer close(intChan)
+	myJson := `
+[
+    {
+        "first_name": "Clark",
+        "last_name": "Kent",
+        "hair_color": "black",
+        "has_dog": true
+    },
+    {
+        "first_name": "Bruce",
+        "last_name": "Wayne",
+        "hair_color": "black",
+        "has_dog": false
+    }
+]`
 
-	go calculateValue(intChan)
+	// JSON -> struct
+	var unmarshalled []Person
 
-	num := <-intChan
-	log.Println(num)
+	err := json.Unmarshal([]byte(myJson), &unmarshalled)
+
+	if err != nil {
+		fmt.Println("Error unmarshalling JSON", err)
+	}
+
+	fmt.Printf("unmarshalled: %v \n", unmarshalled)
+
+	// struct -> JSON
+	var mySlice []Person
+
+	m1 := Person{
+		FirstName: "Wally",
+		LastName:  "West",
+		HairColor: "red",
+		HasDog:    false,
+	}
+
+	m2 := Person{
+		FirstName: "Diane",
+		LastName:  "Prince",
+		HairColor: "black",
+		HasDog:    true,
+	}
+
+	mySlice = append(mySlice, m1, m2)
+
+	newJson, err := json.MarshalIndent(mySlice, "", "  ")
+	if err != nil {
+		fmt.Println("error marshaling:", err)
+	}
+
+	fmt.Println("marshaled: \n", string(newJson))
 }
